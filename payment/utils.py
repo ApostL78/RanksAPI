@@ -62,5 +62,7 @@ def _make_line_items(items, tax):
             'tax_rates': [tax.id] if tax else None,
             "quantity": 1,
         }
+        if not item.description:
+            item_data["price_data"]["product_data"].pop("description")
         line_items.append(item_data)
     return line_items
