@@ -1,3 +1,4 @@
+[![Django CI](https://github.com/ApostL78/RanksAPI/actions/workflows/django.yml/badge.svg)](https://github.com/ApostL78/RanksAPI/actions/workflows/django.yml)
 # Touch it without cloning
 
 https://apostl78.pythonanywhere.com/admin/
