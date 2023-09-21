@@ -21,12 +21,18 @@ def get_order_session(order):
             duration=order.discount.duration,
         )
     tax = None
-    if order.tax:
+    if order.tax and order.tax.description:
         tax = stripe.TaxRate.create(
             display_name=order.tax.display_name,
             inclusive=order.tax.inclusive,
             percentage=order.tax.percentage,
             description=order.tax.description,
+        )
+    elif order.tax:
+        tax = stripe.TaxRate.create(
+            display_name=order.tax.display_name,
+            inclusive=order.tax.inclusive,
+            percentage=order.tax.percentage,
         )
     session = stripe.checkout.Session.create(
         payment_method_types=["card"],
