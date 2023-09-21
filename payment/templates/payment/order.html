@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Order Details</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+.card,body{display:flex}h1,p{text-align:center;color:#fff}.card,h1,p{color:#fff}body{background-image:url('https://ucarecdn.com/9117e531-57c7-43d3-9f6c-2b0929df6198/');background-position:center;background-repeat:no-repeat;background-size:cover;background-color:#f0f0f0;justify-content:center;align-items:center;height:100vh;font-family:Serif,serif;font-size:18px}.card{background-color:rgba(255,255,255,.15);border-radius:20px;box-shadow:0 8px 32px 0 rgba(31,38,135,.37);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border:1px solid rgba(255,255,255,.18);width:400px;padding:20px;flex-direction:column;align-items:center}p{font-weight:550;font-size:20px;margin:10px 0}button{background-color:#9ee179;color:#000;border:none;border-radius:10px;padding:10px 20px;cursor:pointer;margin-top:20px;transition:.3s}button:hover{background-color:rgba(0,0,0,.76);color:#fff}    </style>
+</head>
+<body>
+{% for item in order.items.all %}
+	<div style="margin-right: 10px; margin-bottom: 10px" class="card">
+    <h1>Item Details</h1>
+    <p>Name: {{ item.name }}</p>
+    <p>Description: {{ item.description }}</p>
+    <p>Price: {{ item.price }}</p>
+</div>
+{% endfor %}
+
+
+<button style="position:fixed; bottom:100px; left:48%;" id="checkout-button">Buy</button>
+<script>
+    var stripe = Stripe('pk_test_51NsRQCFlJD4iOHm92e1te0zIoCzDje7u3yozmlMNc9Wriww3KTwZibzVn9QA0RNa6eb4S7We3ECrE0F62qR9vjDk00JG5X8Spf');
+    var checkoutButton = document.getElementById('checkout-button');
+    checkoutButton.addEventListener('click', function () {
+        fetch('/buy_order/{{ order.id }}')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                return stripe.redirectToCheckout({sessionId: data.session_id});
+            })
+            .then(function (result) {
+                if (result.error) {
+                    alert(result.error.message);
+                }
+            });
+    });
+</script>
+</body>
+</html>
