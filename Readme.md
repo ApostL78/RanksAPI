@@ -2,6 +2,7 @@
 # Touch it without cloning
 
 https://apostl78.pythonanywhere.com/admin/
+login: test    password: test
 # How To Run
 To start this app you need to:
 1. Clone this repo and move to project
