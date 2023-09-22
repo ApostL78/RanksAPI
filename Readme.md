@@ -1,4 +1,5 @@
 [![Django CI](https://github.com/ApostL78/RanksAPI/actions/workflows/django.yml/badge.svg)](https://github.com/ApostL78/RanksAPI/actions/workflows/django.yml)
+[![codecov](https://codecov.io/gh/ApostL78/RanksAPI/graph/badge.svg?token=MBFC9OE5B7)](https://codecov.io/gh/ApostL78/RanksAPI)
 # Touch it without cloning
 
 https://apostl78.pythonanywhere.com/admin/
